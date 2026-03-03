@@ -1,0 +1,25 @@
+{
+  "name": "Python Dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy",
+        "charliermarsh.ruff",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "postStartCommand": "bash ${containerWorkspaceFolder}/.devcontainer/post-start.sh",
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=${localEnv:HOME}/.config/opencode,target=/home/vscode/.config/opencode,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.local/share/opencode,target=/home/vscode/.local/share/opencode,type=bind,consistency=cached",
+    "source=ai-workshop-venv,target=${containerWorkspaceFolder}/.venv,type=volume",
+    "source=ai-workshop-pip-cache,target=/home/vscode/.cache/pip,type=volume"
+  ]
+}
