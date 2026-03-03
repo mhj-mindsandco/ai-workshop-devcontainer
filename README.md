@@ -13,9 +13,9 @@ just test
 If you prefer not to use `just`, you can run the equivalent commands manually:
 
 ```bash
-python -m venv .venv
-.venv/bin/python -m pip install --upgrade pip
-.venv/bin/python -m pip install -r requirements.txt
+uv venv .venv
+uv pip install --python .venv/bin/python -r requirements.txt
+uv pip install --python .venv/bin/python ruff black pytest mypy
 PYTHONPATH=src .venv/bin/python -m ai_workshop
 PYTHONPATH=src .venv/bin/python -m pytest
 ```
@@ -25,9 +25,9 @@ PYTHONPATH=src .venv/bin/python -m pytest
 This repo includes a minimal devcontainer in `.devcontainer/` for a ready-to-code setup.
 
 - Base image: `mcr.microsoft.com/devcontainers/python:3.12`
-- Installed tools: `just`, `opencode`, `build-essential`, `curl`
+- Installed tools: `uv`, `just`, `opencode`, `build-essential`, `curl`
 - Startup bootstrap: `postStartCommand` runs `.devcontainer/post-start.sh` to repair volume ownership and run `just dev` if `.venv` is missing
-- Named volumes are used for `.venv` and pip cache to speed up rebuilds
+- Named volumes are used for `.venv` and uv cache to speed up rebuilds
 
 ### OpenCode in the devcontainer
 
@@ -43,7 +43,7 @@ This keeps your OpenCode config and auth credentials available inside the devcon
 The devcontainer mounts named volumes for Python caching:
 
 - `ai-workshop-venv` -> `${containerWorkspaceFolder}/.venv`
-- `ai-workshop-pip-cache` -> `/home/vscode/.cache/pip`
+- `ai-workshop-uv-cache` -> `/home/vscode/.cache/uv`
 
 This preserves the virtualenv and downloaded wheels across container rebuilds/reopens.
 
