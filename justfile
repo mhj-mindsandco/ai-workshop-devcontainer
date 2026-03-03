@@ -4,13 +4,10 @@ set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
   just --list
 
 @install:
-  uv venv .venv
-  uv pip install --python .venv/bin/python -r requirements.txt
+  uv sync
 
 @dev:
-  uv venv .venv
-  uv pip install --python .venv/bin/python -r requirements.txt
-  uv pip install --python .venv/bin/python ruff black pytest mypy
+  uv sync --dev
 
 @run:
   if [ -x .venv/bin/python ]; then PYTHONPATH=src .venv/bin/python -m ai_workshop; else PYTHONPATH=src python -m ai_workshop; fi

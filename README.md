@@ -13,9 +13,7 @@ just test
 If you prefer not to use `just`, you can run the equivalent commands manually:
 
 ```bash
-uv venv .venv
-uv pip install --python .venv/bin/python -r requirements.txt
-uv pip install --python .venv/bin/python ruff black pytest mypy
+uv sync --dev
 PYTHONPATH=src .venv/bin/python -m ai_workshop
 PYTHONPATH=src .venv/bin/python -m pytest
 ```
@@ -57,6 +55,7 @@ If host Git settings change later, rebuild/reopen the container to refresh.
 
 - `.devcontainer` - devcontainer image and container config
 - `justfile` - convenience commands (`dev`, `run`, `test`)
+- `pyproject.toml` - project metadata and dependency groups managed by uv
 - `src/ai_workshop` - minimal package and entrypoint
 - `tests` - placeholder for tests
 
